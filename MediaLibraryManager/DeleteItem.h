@@ -1,3 +1,3 @@
 #pragma once
-int DeleteItem(int);
+void DeleteItem(int);
 void DeleteItem();

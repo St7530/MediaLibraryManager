@@ -130,17 +130,22 @@
     <ClCompile Include="AddItem.cpp" />
     <ClCompile Include="DeleteItem.cpp" />
     <ClCompile Include="EditItem.cpp" />
+    <ClCompile Include="Exit.cpp" />
     <ClCompile Include="FindItem.cpp" />
     <ClCompile Include="MediaLibraryManager.cpp" />
+    <ClCompile Include="SaveLibrary.cpp" />
     <ClCompile Include="ShowLibrary.cpp" />
     <ClCompile Include="ShowStats.cpp" />
+    <ClCompile Include="Globals.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddItem.h" />
     <ClInclude Include="DeleteItem.h" />
     <ClInclude Include="EditItem.h" />
+    <ClInclude Include="Exit.h" />
     <ClInclude Include="FindItem.h" />
     <ClInclude Include="Globals.h" />
+    <ClInclude Include="SaveLibrary.h" />
     <ClInclude Include="ShowLibrary.h" />
     <ClInclude Include="ShowStats.h" />
   </ItemGroup>

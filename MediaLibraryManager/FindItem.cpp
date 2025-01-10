@@ -1,22 +1,33 @@
 #include <iostream>
-#include <fstream>
 #include "Globals.h"
 #include "ShowLibrary.h"
 using namespace std;
 
-void FindBy(int way) { // way 指对应内容在库中的位置，也是后方读取内容时需要循环的次数
-	string findContent;
-
-	switch (way)
+void FindBy(int choice) {
+	int count = 0;
+	switch (choice)
 	{
 	case 1: // 按编号
+	{
 		cout << "输入物品编号：";
+		int findContent;
 		cin >> findContent;
+		cout << endl;
+		for (int i = 0; res[i]; i++)
+		{
+			if (res[i]->GetId() == findContent)
+			{
+				res[i]->Show();
+				count++;
+			}
+		}
+	}
 		break;
 	case 2: // 按类别
+	{
 		cout << "选择物品类别——[1] 图书, [2] 视频光盘, [3] 图画：";
-		int choice;
 		cin >> choice;
+		string findContent;
 		switch (choice)
 		{
 		case 1:
@@ -29,37 +40,40 @@ void FindBy(int way) { // way 指对应内容在库中的位置，也是后方读取内容时需要循环
 			findContent = "Picture";
 			break;
 		}
+		cout << endl;
+		for (int i = 0; res[i]; i++)
+		{
+			if (res[i]->GetClassName() == findContent)
+			{
+				res[i]->Show();
+				count++;
+			}
+		}
+	}
 		break;
 	case 3: // 按标题
+	{
 		cout << "输入物品标题：";
+		string findContent;
 		cin >> findContent;
+		cout << endl;
+		for (int i = 0; res[i]; i++)
+		{
+			if (res[i]->GetTitle() == findContent)
+			{
+				res[i]->Show();
+				count++;
+			}
+		}
+	}
 		break;
 	}
-
-	ifstream inFile("Library.txt");
-	cout << endl;
-	int count = 0;
-
-	for (int i = 0; linePos[i] > -1; i++)
-	{
-		inFile.seekg(linePos[i]);
-		string tmpContent;
-		for (int j = 0; j < way; j++)
-		{
-			inFile >> tmpContent;
-		}
-		if (tmpContent == findContent)
-		{
-			ShowItem(i);
-			count++;
-		}
-	}
 	cout << endl << "共找到 " << count << " 个物品。" << endl;
-	inFile.close();
 }
 
 void FindItem() { // 查找物品
 	system("cls");
+
 	cout << "选择查找方式——[1] 按编号, [2] 按类别, [3] 按标题: ";
 	int choice;
 	cin >> choice;
@@ -75,60 +89,47 @@ void FindItem() { // 查找物品
 		FindBy(3);
 		break;
 	}
+
 	system("pause");
 }
 
 int GetResourceCount(int resourceClass) { // 0 - All, 1 - Book, 2 - VCD, 3 - Picture
-	ifstream inFile("Library.txt");
-	string findContent;
 	int count = 0;
-
-	switch (resourceClass)
+	if (resourceClass==0) // All
 	{
-	case 0: // All
-		for (int i = 0; linePos[i] > -1; i++)
+		for (int i = 0; res[i]; i++)
 		{
 			count++;
 		}
-		inFile.close();
 		return count;
-		break;
-	case 1: // Book
+	}
+	string findContent;
+	switch (resourceClass)
+	{
+	case 1: // 图书
 		findContent = "Book";
 		break;
-	case 2: // VCD
+	case 2: // 视频光盘
 		findContent = "VCD";
 		break;
-	case 3: // Picture
+	case 3: // 图画
 		findContent = "Picture";
 		break;
 	}
-
-	for (int i = 0; linePos[i] > -1; i++)
+	for (int i = 0; res[i]; i++)
 	{
-		inFile.seekg(linePos[i]);
-		string tmpContent;
-		for (int j = 0; j < 2; j++)
-		{
-			inFile >> tmpContent;
-		}
-		if (tmpContent == findContent)
+		if (res[i]->GetClassName() == findContent)
 		{
 			count++;
 		}
 	}
-	inFile.close();
 	return count;
 }
 
-bool HasItem(int id) {
-	ifstream inFile("Library.txt");
-	for (int i = 0; linePos[i] > -1; i++)
+bool HasId(int id) {
+	for (int i = 0; res[i]; i++)
 	{
-		inFile.seekg(linePos[i]);
-		int tmpContent;
-		inFile >> tmpContent;
-		if (tmpContent == id)
+		if (res[i]->GetId() == id)
 		{
 			return true;
 		}
@@ -136,19 +137,10 @@ bool HasItem(int id) {
 	return false;
 }
 
-int GetLineById(int id) {
-	if (!HasItem(id))
+int GetIndexById(int id) { // 用物品的 id 获取其在 res[] 的索引
+	for (int i = 0; res[i]; i++)
 	{
-		cerr << "Error!";
-		return -1;
-	}
-	ifstream inFile("Library.txt");
-	for (int i = 0; linePos[i] > -1; i++)
-	{
-		inFile.seekg(linePos[i]);
-		int tmpContent;
-		inFile >> tmpContent;
-		if (tmpContent == id)
+		if (res[i]->GetId() == id)
 		{
 			return i;
 		}

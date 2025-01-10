@@ -1,3 +1,3 @@
 #pragma once
-int AddItem(int);
+void AddItem(int);
 void AddItem();

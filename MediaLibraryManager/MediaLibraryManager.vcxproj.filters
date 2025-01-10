@@ -36,6 +36,15 @@
     <ClCompile Include="ShowStats.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveLibrary.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddItem.h">
@@ -57,6 +66,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ShowStats.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveLibrary.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

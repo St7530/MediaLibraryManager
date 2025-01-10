@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Globals.h"
 #include "AddItem.h"
 #include "DeleteItem.h"
 #include "FindItem.h"
@@ -13,13 +14,13 @@ void EditItem() { // 编辑物品
 	cout << "输入要编辑物品的编号：";
 	cin >> id;
 	cout << endl;
-	if (!HasItem(id))
+	if (!HasId(id))
 	{
 		cerr << "该编号不存在！" << endl;
 		system("pause");
 		return;
 	}
-	ShowItem(GetLineById(id));
+	res[GetIndexById(id)]->Show();
 	int confirm;
 	cout << endl << "输入 1 确认编辑，输入其它值取消编辑：";
 	cin >> confirm;
@@ -30,22 +31,9 @@ void EditItem() { // 编辑物品
 		return;
 	}
 
-	// Delete item
-	if (DeleteItem(id) != 0)
-	{
-		cerr << "Error!" << endl;
-		system("pause");
-		return;
-	}
-
-	// Add item
-	if (AddItem(id) != 0)
-	{
-		cerr << "Error!" << endl;
-		system("pause");
-		return;
-	}
-
-	cout << endl << "编辑成功。";
+	DeleteItem(id);
+	AddItem(id);
+	isChanged = true;
+	cout << endl << "编辑成功。" << endl;
 	system("pause");
 }

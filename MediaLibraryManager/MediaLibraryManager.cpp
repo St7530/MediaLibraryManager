@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
 #include "Globals.h"
 #include "ShowLibrary.h"
 #include "FindItem.h"
@@ -10,39 +9,51 @@
 #include "EditItem.h"
 #include "DeleteItem.h"
 #include "ShowStats.h"
+#include "SaveLibrary.h"
+#include "Exit.h"
 using namespace std;
 
-streampos linePos[100];
+Resource* res[100];
+bool isChanged = false;
 
 int main()
 {
-	// Initialize
+	// Initialize system
 	system("title 媒体库管理系统");
 	ifstream inFile("Library.txt");
-	if (!inFile)
+	if (!inFile) // Generate example Library.txt
 	{
-		ofstream outFile("Library.txt"); // Generate example Library.txt
+		ofstream outFile("Library.txt");
 		outFile << "1 Book 示例标题 示例作者 adult 示例出版社 12345678 75";
 		outFile.close();
+	}
+
+	// Load res[]
+	cout << "正在加载物品…";
+	string tmpLine;
+	for (int i = 0; ; i++)
+	{
+		int id, additional2, additional3;	string type, title, author, rate, additional1;
+		inFile >> id >> type >> title >> author >> rate >> additional1 >> additional2 >> additional3;
+		if (type == "Book")
+		{
+			res[i] = new Book(id, title, author, rate, additional1, additional2, additional3);
+		}
+		else if (type == "VCD")
+		{
+			res[i] = new VCD(id, title, author, rate, additional1, additional2, additional3);
+		}
+		else if (type == "Picture")
+		{
+			res[i] = new Picture(id, title, author, rate, additional1, additional2, additional3);
+		}
+		else
+			break;
 	}
 	inFile.close();
 
 	while (true)
 	{
-		// Calculate linePos
-		ifstream inFile("Library.txt");
-		string tmpLine;
-		linePos[0] = 0;
-		for (int i = 1; i < 100; i++)
-		{
-			linePos[i] = -1;
-		}
-		for (int i = 1; getline(inFile, tmpLine); i++)
-		{
-			linePos[i] = inFile.tellg();
-		}
-		inFile.close();
-
 		// Home
 		system("cls");
 		cout << "[1] 显示物品库" << endl
@@ -51,6 +62,7 @@ int main()
 			<< "[4] 编辑物品" << endl
 			<< "[5] 删除物品" << endl
 			<< "[6] 统计信息" << endl
+			<< "[7] 保存更改" << endl
 			<< "[0] 退出" << endl;
 		int choice;
 		cin >> choice;
@@ -74,8 +86,19 @@ int main()
 		case 6: // 统计信息
 			ShowStats();
 			break;
-		case 0:
-			return 0;
+		case 7: // 保存更改
+			SaveLibrary();
+			break;
+		case 0: // 退出
+			choice = Exit();
+			switch (choice)
+			{
+			case 0: // Exit
+				return 0;
+			case 1: // Do not exit
+				break;
+			}
+			break;
 		}
 	}
 }
