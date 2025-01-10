@@ -27,6 +27,8 @@ int main()
 		outFile << "1 Book 示例标题 示例作者 adult 示例出版社 12345678 75";
 		outFile.close();
 	}
+	inFile.close();
+	inFile.open("Library.txt");
 
 	// Load res[]
 	cout << "正在加载物品…";
