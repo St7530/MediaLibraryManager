@@ -24,4 +24,5 @@ int Exit() { // 0 - Exit, 1 - Do not exit
 			return 1;
 		}
 	}
+	return 0;
 }
