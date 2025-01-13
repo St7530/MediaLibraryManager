@@ -16,7 +16,7 @@ void SaveLibrary() { // 保存更改
 		}
 	}
 	isChanged = false;
-	cout << endl << "已保存物品库。" << endl;
+	cout << "已保存物品库。" << endl;
 
 	system("pause");
 }

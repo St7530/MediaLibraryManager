@@ -15,14 +15,14 @@ void FindBy(int choice) {
 		cout << endl;
 		for (int i = 0; res[i]; i++)
 		{
-			if (res[i]->GetId() == findContent)
+			if (res[i]->id == findContent)
 			{
 				res[i]->Show();
 				count++;
 			}
 		}
 	}
-		break;
+	break;
 	case 2: // 按类别
 	{
 		cout << "选择物品类别——[1] 图书, [2] 视频光盘, [3] 图画：";
@@ -50,7 +50,7 @@ void FindBy(int choice) {
 			}
 		}
 	}
-		break;
+	break;
 	case 3: // 按标题
 	{
 		cout << "输入物品标题：";
@@ -59,19 +59,20 @@ void FindBy(int choice) {
 		cout << endl;
 		for (int i = 0; res[i]; i++)
 		{
-			if (res[i]->GetTitle() == findContent)
+			if (res[i]->title == findContent)
 			{
 				res[i]->Show();
 				count++;
 			}
 		}
 	}
-		break;
+	break;
 	}
 	cout << endl << "共找到 " << count << " 个物品。" << endl;
 }
 
 void FindItem() { // 查找物品
+	system("title 查找物品 - 媒体库管理系统");
 	system("cls");
 
 	cout << "选择查找方式——[1] 按编号, [2] 按类别, [3] 按标题: ";
@@ -93,9 +94,30 @@ void FindItem() { // 查找物品
 	system("pause");
 }
 
-int GetResourceCount(int resourceClass) { // 0 - All, 1 - Book, 2 - VCD, 3 - Picture
+bool HasId(int id) {
+	for (int i = 0; res[i]; i++)
+	{
+		if (res[i]->id == id)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+int GetIndexById(int id) { // 用物品的 id 获取其在 res[] 的索引
+	for (int i = 0; res[i]; i++)
+	{
+		if (res[i]->id == id)
+		{
+			return i;
+		}
+	}
+}
+
+int GetResourceCount(int resourceClass) { // 0 - All (Default), 1 - 图书, 2 - 视频光盘, 3 - 图画
 	int count = 0;
-	if (resourceClass==0) // All
+	if (resourceClass == 0) // All
 	{
 		for (int i = 0; res[i]; i++)
 		{
@@ -124,25 +146,4 @@ int GetResourceCount(int resourceClass) { // 0 - All, 1 - Book, 2 - VCD, 3 - Pic
 		}
 	}
 	return count;
-}
-
-bool HasId(int id) {
-	for (int i = 0; res[i]; i++)
-	{
-		if (res[i]->GetId() == id)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-int GetIndexById(int id) { // 用物品的 id 获取其在 res[] 的索引
-	for (int i = 0; res[i]; i++)
-	{
-		if (res[i]->GetId() == id)
-		{
-			return i;
-		}
-	}
 }

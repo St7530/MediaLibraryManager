@@ -19,7 +19,6 @@ bool isChanged = false;
 int main()
 {
 	// Initialize system
-	system("title 媒体库管理系统");
 	ifstream inFile("Library.txt");
 	if (!inFile) // Generate example Library.txt
 	{
@@ -57,8 +56,13 @@ int main()
 	while (true)
 	{
 		// Home
+		system("title 媒体库管理系统");
 		system("cls");
-		cout << "[1] 显示物品库" << endl
+		cout << "------------------" << endl
+			<< "媒体库管理系统" << endl
+			<< "------------------" << endl
+			<< endl
+			<< "[1] 显示物品库" << endl
 			<< "[2] 查找物品" << endl
 			<< "[3] 添加物品" << endl
 			<< "[4] 编辑物品" << endl

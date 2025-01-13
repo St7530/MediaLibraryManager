@@ -5,9 +5,10 @@ using namespace std;
 
 int Exit() { // 0 - Exit, 1 - Do not exit
 	system("cls");
-	if (isChanged)
+
+	if (isChanged) // 有更改尚未保存
 	{
-		cout << "更改尚未保存！" << endl
+		cout << "有更改尚未保存！" << endl
 			<< "[1] 保存并退出" << endl
 			<< "[2] 不保存并退出" << endl
 			<< "[3] 取消退出" << endl;
@@ -24,5 +25,6 @@ int Exit() { // 0 - Exit, 1 - Do not exit
 			return 1;
 		}
 	}
-	return 0;
+	else
+		return 0; // 没有未保存的更改
 }

@@ -4,6 +4,7 @@
 extern bool isChanged;
 
 #include <iostream>
+#include "FindItem.h"
 using namespace std;
 
 class Resource {
@@ -11,20 +12,16 @@ public:
 	Resource(int id, string title, string author, string rate)
 		: id(id), title(title), author(author), rate(rate) {
 	}
-	// 拷贝构造函数
-	Resource(const Resource& other)
-		: id(other.id), title(other.title), author(other.author), rate(other.rate) {
-	}
-	virtual Resource* Clone() = 0;
 	virtual void Show_Id();
 	virtual void Show_Resource();
 	virtual void Show() = 0;
 	virtual void Save_Id(ofstream&);
 	virtual void Save_Resource(ofstream&);
 	virtual void Save(ofstream&) = 0;
-	int GetId() { return id; }
-	string GetTitle() { return title; }
 	virtual string GetClassName() = 0;
+	friend void FindBy(int);
+	friend bool HasId(int);
+	friend int GetIndexById(int);
 private:
 	int id; // 编号
 	string title; // 标题
@@ -37,11 +34,6 @@ public:
 	Book(int id, string title, string author, string rate, string press, int ISBN, int page)
 		: Resource(id, title, author, rate), press(press), ISBN(ISBN), page(page) {
 	}
-	// 拷贝构造函数
-	Book(const Book& other)
-		: Resource(other), press(other.press), ISBN(other.ISBN), page(other.page) {
-	}
-	Resource* Clone() override;
 	void Show() override;
 	void Save(ofstream&) override;
 	string GetClassName() override { return "Book"; }
@@ -56,11 +48,6 @@ public:
 	VCD(int id, string title, string author, string rate, string name, int year, int period)
 		: Resource(id, title, author, rate), name(name), year(year), period(period) {
 	}
-	// 拷贝构造函数
-	VCD(const VCD& other)
-		: Resource(other), name(other.name), year(other.year), period(other.period) {
-	}
-	Resource* Clone() override;
 	void Show() override;
 	void Save(ofstream&) override;
 	string GetClassName() override { return "VCD"; }
@@ -75,11 +62,6 @@ public:
 	Picture(int id, string title, string author, string rate, string nation, int length, int width)
 		: Resource(id, title, author, rate), nation(nation), length(length), width(width) {
 	}
-	// 拷贝构造函数
-	Picture(const Picture& other)
-		: Resource(other), nation(other.nation), length(other.length), width(other.width) {
-	}
-	Resource* Clone() override;
 	void Show() override;
 	void Save(ofstream&) override;
 	string GetClassName() override { return "Picture"; }

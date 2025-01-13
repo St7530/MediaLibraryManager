@@ -3,7 +3,7 @@
 #include "FindItem.h"
 using namespace std;
 
-void AddResource(string& title, string& author, string& rate) { // 添加物品 - 输入 Resource 属性
+static void AddResource(string& title, string& author, string& rate) { // 添加物品 - 输入 Resource 属性
 	cout << "输入标题：";	cin >> title;
 	cout << "输入作者：";	cin >> author;
 	cout << "输入评级：";	cin >> rate;
@@ -20,7 +20,7 @@ void AddItem(int id) {
 	int additional2, additional3;	string type, title, author, rate, additional1;
 	switch (choice)
 	{
-	case 1: // Book
+	case 1: // 图书
 		type = "Book";
 		AddResource(title, author, rate);
 		cout << "输入出版社：";	cin >> additional1;
@@ -28,7 +28,7 @@ void AddItem(int id) {
 		cout << "输入页数：";	cin >> additional3;
 		res[count] = new Book(id, title, author, rate, additional1, additional2, additional3);
 		break;
-	case 2: // VCD
+	case 2: // 视频光盘
 		type = "VCD";
 		AddResource(title, author, rate);
 		cout << "输入出品者：";	cin >> additional1;
@@ -36,7 +36,7 @@ void AddItem(int id) {
 		cout << "输入视频时长：";	cin >> additional3;
 		res[count] = new VCD(id, title, author, rate, additional1, additional2, additional3);
 		break;
-	case 3: // Picture
+	case 3: // 图画
 		type = "Picture";
 		AddResource(title, author, rate);
 		cout << "输入出口国籍：";	cin >> additional1;
@@ -48,6 +48,7 @@ void AddItem(int id) {
 }
 
 void AddItem() { // 添加物品
+	system("title 添加物品 - 媒体库管理系统");
 	system("cls");
 
 	// Input id

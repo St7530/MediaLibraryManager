@@ -1,5 +1,6 @@
 #pragma once
+void FindBy(int);
 void FindItem();
-int GetResourceCount(int);
 bool HasId(int);
 int GetIndexById(int);
+int GetResourceCount(int resourceClass = 0);

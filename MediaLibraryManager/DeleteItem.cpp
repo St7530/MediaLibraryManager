@@ -9,8 +9,7 @@ void DeleteItem(int id) {
 	{
 		if (res[i + 1])
 		{
-			res[i] = res[i+1]->Clone();
-			res[i+1] = NULL;
+			res[i] = res[i+1];
 		}
 		else
 		{
@@ -20,6 +19,7 @@ void DeleteItem(int id) {
 }
 
 void DeleteItem() { // 删除物品
+	system("title 删除物品 - 媒体库管理系统");
 	system("cls");
 
 	// Gather information

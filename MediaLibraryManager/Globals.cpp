@@ -58,14 +58,3 @@ void Picture::Save(ofstream& out) {
 	Resource::Save_Resource(out);
 	out << nation << " " << length << " " << width;
 }
-
-// Clone
-Resource* Book::Clone() {
-	return new Book(*this);
-}
-Resource* VCD::Clone() {
-	return new VCD(*this);
-}
-Resource* Picture::Clone() {
-	return new Picture(*this);
-}

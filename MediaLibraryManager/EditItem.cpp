@@ -7,6 +7,7 @@
 using namespace std;
 
 void EditItem() { // 编辑物品
+	system("title 编辑物品 - 媒体库管理系统");
 	system("cls");
 
 	// Gather information
