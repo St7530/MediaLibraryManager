@@ -11,6 +11,10 @@ void ShowLibrary() { // 显示物品库
 		res[i]->Show();
 	}
 
+	if (!res[0])
+	{
+		cerr << "物品库为空！";
+	}
 	cout << endl;
 	system("pause");
 }

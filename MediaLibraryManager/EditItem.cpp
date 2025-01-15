@@ -25,9 +25,10 @@ void EditItem() { // 编辑物品
 	int confirm;
 	cout << endl << "输入 1 确认编辑，输入其它值取消编辑：";
 	cin >> confirm;
+	cout << endl;
 	if (confirm != 1)
 	{
-		cout << endl << "已取消编辑。" << endl;
+		cout << "已取消编辑。" << endl;
 		system("pause");
 		return;
 	}

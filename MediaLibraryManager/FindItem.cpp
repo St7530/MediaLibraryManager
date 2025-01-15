@@ -26,9 +26,10 @@ void FindBy(int choice) {
 	case 2: // 按类别
 	{
 		cout << "选择物品类别——[1] 图书, [2] 视频光盘, [3] 图画：";
-		cin >> choice;
+		int choice_;
+		cin >> choice_;
 		string findContent;
-		switch (choice)
+		switch (choice_)
 		{
 		case 1:
 			findContent = "Book";
@@ -38,6 +39,10 @@ void FindBy(int choice) {
 			break;
 		case 3:
 			findContent = "Picture";
+			break;
+		default:
+			cerr << endl << "无效的输入！";
+			findContent = "";
 			break;
 		}
 		cout << endl;
@@ -68,7 +73,26 @@ void FindBy(int choice) {
 	}
 	break;
 	}
-	cout << endl << "共找到 " << count << " 个物品。" << endl;
+	cout << endl;
+	if (count > 0)
+	{
+		cout << "共找到 " << count << " 个物品。";
+	}
+	else
+	{
+		switch (choice)
+		{
+		case 1:
+			cerr << "该编号不存在！";
+			break;
+		case 2:
+			cerr << "该类别没有物品！";
+			break;
+		case 3:
+			cerr << "该标题不存在！";
+			break;
+		}
+	}
 }
 
 void FindItem() { // 查找物品
@@ -89,8 +113,12 @@ void FindItem() { // 查找物品
 	case 3: // 按标题
 		FindBy(3);
 		break;
+	default:
+		cerr << endl << "无效的选择！";
+		break;
 	}
 
+	cout << endl;
 	system("pause");
 }
 
@@ -113,6 +141,7 @@ int GetIndexById(int id) { // 用物品的 id 获取其在 res[] 的索引
 			return i;
 		}
 	}
+	return -1;
 }
 
 int GetResourceCount(int resourceClass) { // 0 - All (Default), 1 - 图书, 2 - 视频光盘, 3 - 图画

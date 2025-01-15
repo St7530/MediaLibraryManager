@@ -13,16 +13,19 @@ int Exit() { // 0 - Exit, 1 - Do not exit
 			<< "[2] 不保存并退出" << endl
 			<< "[3] 取消退出" << endl;
 		int choice;
-		cin >> choice;
-		switch (choice)
+		while(true)
 		{
-		case 1: // 保存并退出
-			SaveLibrary();
-			return 0;
-		case 2: // 不保存并退出
-			return 0;
-		case 3: // 取消退出
-			return 1;
+			cin >> choice;
+			switch (choice)
+			{
+			case 1: // 保存并退出
+				SaveLibrary();
+				return 0;
+			case 2: // 不保存并退出
+				return 0;
+			case 3: // 取消退出
+				return 1;
+			}
 		}
 	}
 	else

@@ -12,7 +12,10 @@ static void AddResource(string& title, string& author, string& rate) { // 添加物
 void AddItem(int id) {
 	// Calculate res[] count
 	int count = 0;
-	for (; res[count]; count++) {}
+	while (res[count])
+	{
+		count++;
+	}
 
 	cout << "选择物品类别——[1] 图书, [2] 视频光盘, [3] 图画: ";
 	int choice;
@@ -61,9 +64,15 @@ void AddItem() { // 添加物品
 		system("pause");
 		return;
 	}
+	else
+	{
+		AddItem(id);
+		isChanged = true;
+		cout << endl << "已添加物品。" << endl;
+		system("pause");
+		return;
+	}
 
-	AddItem(id);
-	isChanged = true;
-	cout << endl << "已添加物品。" << endl;
+	cerr << endl << "无效的输入！" << endl;
 	system("pause");
 }

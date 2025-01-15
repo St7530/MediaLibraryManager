@@ -9,7 +9,7 @@ void DeleteItem(int id) {
 	{
 		if (res[i + 1])
 		{
-			res[i] = res[i+1];
+			res[i] = res[i + 1];
 		}
 		else
 		{
@@ -21,6 +21,13 @@ void DeleteItem(int id) {
 void DeleteItem() { // 删除物品
 	system("title 删除物品 - 媒体库管理系统");
 	system("cls");
+
+	if (!res[0])
+	{
+		cerr << "物品库为空！" << endl;
+		system("pause");
+		return;
+	}
 
 	// Gather information
 	int id;
